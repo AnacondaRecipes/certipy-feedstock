@@ -26,7 +26,6 @@ requirements:
     - setuptools-scm >=7
   run:
     - python
-    - pyopenssl
     - cryptography
 
 test:
