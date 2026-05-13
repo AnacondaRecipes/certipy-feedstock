@@ -1,17 +1,18 @@
 {% set name = "certipy" %}
-{% set version = "0.2.2" %}
+{% set version = "0.2.3" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: fef1f3d8819ee29c4c67719171c988302823dfe0b6cfbb47d249f374809ba05e
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 4e8701e6a2f281e7a154c2f368cff4edf374009084d29788cbe8c3838897784f
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv"
+  skip: true  # [py<37]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{version}}
   entry_points:
@@ -19,11 +20,11 @@ build:
 
 requirements:
   host:
-    - python
     - pip
-    - wheel
+    - python
     - setuptools >=64
     - setuptools-scm >=7
+    - wheel
   run:
     - python
     - cryptography
